@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Playlist Merger</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main>
+    <header>
+      <h1>🎧 Playlist Merger</h1>
+      <p class="muted">Junte várias playlists do Spotify em uma só, escolha o que fica e adicione músicas extras antes de criar.</p>
+    </header>
+
+    <!-- TELA DE LOGIN / CONFIGURAÇÃO -->
+    <section id="setup" class="card hidden">
+      <h2>Conectar ao Spotify</h2>
+      <ol>
+        <li>Crie um app em <a href="https://developer.spotify.com/dashboard" target="_blank" rel="noopener">developer.spotify.com/dashboard</a>.</li>
+        <li>No campo <strong>Redirect URI</strong> do app, cole exatamente este endereço:
+          <code id="redirect"></code>
+          <button id="copyRedirect" class="small">Copiar</button>
+        </li>
+        <li>Copie o <strong>Client ID</strong> do app e cole aqui:</li>
+      </ol>
+      <input id="clientId" type="text" placeholder="Client ID do seu app Spotify" autocomplete="off">
+      <button id="loginBtn" class="primary">Entrar com Spotify</button>
+      <p id="setupStatus" class="status"></p>
+      <p class="muted">Mais detalhes no README do projeto.</p>
+    </section>
+
+    <!-- APLICATIVO -->
+    <div id="app" class="hidden">
+      <div class="topbar">
+        <span id="userInfo" class="muted"></span>
+        <button id="logoutBtn" class="small">Sair</button>
+      </div>
+
+      <section class="card">
+        <h2>1. Escolha as playlists</h2>
+        <div id="playlists" class="list"></div>
+        <p id="playlistsStatus" class="status"></p>
+        <button id="loadTracksBtn" class="primary">Juntar músicas das selecionadas</button>
+      </section>
+
+      <section class="card">
+        <h2>2. Edite a lista</h2>
+        <p class="muted">Desmarque as músicas que <strong>não</strong> quer na nova playlist.</p>
+        <div class="toolbar">
+          <input id="filter" type="search" placeholder="Filtrar por nome, artista ou álbum…">
+          <button id="checkAll" class="small">Marcar visíveis</button>
+          <button id="uncheckAll" class="small">Desmarcar visíveis</button>
+        </div>
+        <p id="count" class="muted"></p>
+        <div id="tracks" class="list tall"></div>
+        <p id="tracksStatus" class="status"></p>
+      </section>
+
+      <section class="card">
+        <h2>3. Adicione músicas extras (opcional)</h2>
+        <div class="toolbar">
+          <input id="searchBox" type="search" placeholder="Buscar música ou artista…">
+          <button id="searchBtn" class="small">Buscar</button>
+        </div>
+        <div id="results" class="list"></div>
+        <p id="searchStatus" class="status"></p>
+      </section>
+
+      <section class="card">
+        <h2>4. Criar a nova playlist</h2>
+        <input id="newName" type="text" value="Minha playlist combinada" placeholder="Nome da playlist">
+        <label class="inline"><input id="newPublic" type="checkbox"> Pública</label>
+        <button id="createBtn" class="primary">Criar playlist no Spotify</button>
+        <p id="createStatus" class="status"></p>
+      </section>
+    </div>
+  </main>
+  <script src="app.js"></script>
+</body>
+</html>
